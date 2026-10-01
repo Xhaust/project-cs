@@ -2,14 +2,14 @@ using JobProcessor.Jobs;
 using JobProcessor.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<InMemoryJobRepository>();
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 app.MapGet("/health", () => new { status = "ok" });
-app.MapPost("/jobs", () =>
+app.MapPost("/jobs", (InMemoryJobRepository repo) =>
 {
     var job = new Job();
-    var repo = new InMemoryJobRepository();
     repo.AddJob(job);
 
     return Results.Ok(new { job });

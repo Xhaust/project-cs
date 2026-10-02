@@ -9,4 +9,10 @@ public class InMemoryJobRepository
     {
         _jobs[job.Id] = job;
     }
+
+    public Job? GetJob(Guid id)
+    {
+        _jobs.TryGetValue(id, out var job);
+        return job;
+    }
 }

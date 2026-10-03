@@ -14,5 +14,15 @@ app.MapPost("/jobs", (InMemoryJobRepository repo) =>
 
     return Results.Ok(new { job });
 });
+app.MapGet("/jobs/{id:guid}", (InMemoryJobRepository repo, Guid id) =>
+{
+    var job = repo.GetJob(id);
+    if (job == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(new { job });
+});
 
 app.Run();

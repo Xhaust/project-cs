@@ -19,4 +19,18 @@ public class InMemoryJobRepositoryTests
         // Assert
         Assert.NotNull(retrievedJob);
     }
+
+    [Fact]
+    public void GetJob_WithUnknownId_ReturnsNull()
+    {
+        // Arrange
+        var repository = new InMemoryJobRepository();
+        var id = Guid.NewGuid();
+
+        // Act
+        var result = repository.GetJob(id);
+
+        // Assert
+        Assert.Null(result);
+    }
 }

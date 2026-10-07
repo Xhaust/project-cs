@@ -15,4 +15,9 @@ public class InMemoryJobRepository
         _jobs.TryGetValue(id, out var job);
         return job;
     }
+
+    public IEnumerable<Job> GetPendingJobs()
+    {
+        return _jobs.Values.Where(job => job.Status == JobStatus.Pending);
+    }
 }

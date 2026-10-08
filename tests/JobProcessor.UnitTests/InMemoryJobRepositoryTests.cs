@@ -33,4 +33,23 @@ public class InMemoryJobRepositoryTests
         // Assert
         Assert.Null(result);
     }
+
+    [Fact]
+    public void GetPendingJobs_ShouldReturnOnlyPendingJobs()
+    {
+        // Arrange
+        var repository = new InMemoryJobRepository();
+        var pendingJob = new Job { Id = Guid.NewGuid(), Status = JobStatus.Pending };
+        var completedJob = new Job { Id = Guid.NewGuid(), Status = JobStatus.Completed };
+        repository.AddJob(pendingJob);
+        repository.AddJob(completedJob);
+
+        // Act
+        var pendingJobs = repository.GetPendingJobs();
+
+        // Assert
+        Assert.Contains(pendingJob, pendingJobs);
+        Assert.DoesNotContain(completedJob, pendingJobs);
+        Assert.Equal(new[] { pendingJob }, pendingJobs);
+    }
 }

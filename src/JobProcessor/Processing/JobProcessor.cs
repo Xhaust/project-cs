@@ -2,7 +2,7 @@
 
 namespace JobProcessor.Processing
 {
-    public class JobProcessor
+    public class JobProcessorService
     {
         public async Task ProcessJobAsync(Job job)
         {

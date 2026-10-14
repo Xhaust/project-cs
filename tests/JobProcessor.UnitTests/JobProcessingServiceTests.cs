@@ -3,13 +3,13 @@ using JobProcessor.Processing;
 
 namespace JobProcessor.UnitTests;
 
-public class JobProcessorTests
+public class JobProcessingServiceTests
 {
     [Fact]
     public async Task ProcessJobAsync_ShouldMarkJobAsCompleted()
     {
         // Arrange
-        var processor = new JobProcessorService();
+        var processor = new JobProcessingService();
         var job = new Job();
 
         // Act
